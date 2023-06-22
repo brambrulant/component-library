@@ -130,10 +130,10 @@ export const DisabledAndLoading = () => {
         <Typography variant="s">Tertiary</Typography>
       </Button>
       <Button buttonType="primary" disabled>
-        <Typography variant="s">Disabled</Typography>
+        <Typography variant="m">Disabled</Typography>
       </Button>
       <Button buttonType="primary" disabled startAdornment={<ArrowLeft />}>
-        <Typography variant="s">Disabled</Typography>
+        <Typography variant="l">Disabled</Typography>
       </Button>
     </StyledDiv>
   )
