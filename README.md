@@ -25,11 +25,11 @@ npx create-turbo@latest -e design-system
 
 ### Useful Commands
 
-- `pnpm build` - Build all packages, including the Storybook site
-- `pnpm dev` - Run all packages locally and preview with Storybook
-- `pnpm lint` - Lint all packages
-- `pnpm changeset` - Generate a changeset
-- `pnpm clean` - Clean up all `node_modules` and `dist` folders (runs each package's clean script)
+- `yarn build` - Build all packages, including the Storybook site
+- `yarn dev` - Run all packages locally and preview with Storybook
+- `yarn lint` - Lint all packages
+- `yarn changeset` - Generate a changeset
+- `yarn clean` - Clean up all `node_modules` and `dist` folders (runs each package's clean script)
 
 ## Turborepo
 
@@ -47,7 +47,7 @@ This Turborepo includes the following packages and applications:
 - `packages/@trunkrs-fe/tsconfig`: Shared `tsconfig.json`s used throughout the Turborepo
 - `packages/eslint-config-trunkrs-fe`: ESLint preset
 
-Each package and app is 100% [TypeScript](https://www.typescriptlang.org/). Workspaces enables us to "hoist" dependencies that are shared between packages to the root `package.json`. This means smaller `node_modules` folders and a better local dev experience. To install a dependency for the entire monorepo, use the `-w` workspaces flag with `pnpm add`.
+Each package and app is 100% [TypeScript](https://www.typescriptlang.org/). Workspaces enables us to "hoist" dependencies that are shared between packages to the root `package.json`. This means smaller `node_modules` folders and a better local dev experience. To install a dependency for the entire monorepo, use the `-w` workspaces flag with `yarn add`.
 
 This example sets up your `.gitignore` to exclude all generated files, other folders like `node_modules` used to store your dependencies.
 
@@ -55,7 +55,7 @@ This example sets up your `.gitignore` to exclude all generated files, other fol
 
 To make the core library code work across all browsers, we need to compile the raw TypeScript and React code to plain JavaScript. We can accomplish this with `tsup`, which uses `esbuild` to greatly improve performance.
 
-Running `pnpm build` from the root of the Turborepo will run the `build` command defined in each package's `package.json` file. Turborepo runs each `build` in parallel and caches & hashes the output to speed up future builds.
+Running `yarn build` from the root of the Turborepo will run the `build` command defined in each package's `package.json` file. Turborepo runs each `build` in parallel and caches & hashes the output to speed up future builds.
 
 For `trunkrs-fe-core`, the `build` command is the following:
 
@@ -76,7 +76,7 @@ tsup src/index.tsx --format esm,cjs --dts --external react
 }
 ```
 
-Run `pnpm build` to confirm compilation is working correctly. You should see a folder `trunkrs-fe-core/dist` which contains the compiled output.
+Run `yarn build` to confirm compilation is working correctly. You should see a folder `trunkrs-fe-core/dist` which contains the compiled output.
 
 ```bash
 trunkrs-fe-core
@@ -90,25 +90,25 @@ trunkrs-fe-core
 
 Each file inside of `trunkrs-fe-core/src` is a component inside our design system. For example:
 
-```tsx:trunkrs-fe-core/src/Button.tsx
+```tsx:trunkrs-fe-core/src/index.tsx
 import * as React from 'react';
 
 export interface ButtonProps {
   children: React.ReactNode;
 }
 
-export function Button(props: ButtonProps) {
+export function Index(props: ButtonProps) {
   return <button>{props.children}</button>;
 }
 
-Button.displayName = 'Button';
+Index.displayName = 'Index';
 ```
 
 When adding a new file, ensure the component is also exported from the entry `index.tsx` file:
 
 ```tsx:trunkrs-fe-core/src/index.tsx
 import * as React from "react";
-export { Button, type ButtonProps } from "./Button";
+export { Index, type ButtonProps } from "./Index";
 // Add new component exports here
 ```
 
@@ -121,15 +121,15 @@ Storybook provides us with an interactive UI playground for our components. This
 - Support using module path aliases like `@trunkrs-fe-core` for imports
 - Write MDX for component documentation pages
 
-For example, here's the included Story for our `Button` component:
+For example, here's the included Story for our `Index` component:
 
 ```js:apps/docs/stories/button.stories.mdx
-import { Button } from '@trunkrs-fe-core/src';
+import { Index } from '@trunkrs-fe-core/src';
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
 
-<Meta title="Components/Button" component={Button} />
+<Meta title="Components/Index" component={Index} />
 
-# Button
+# Index
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget consectetur tempor, nisl nunc egestas nisi, euismod aliquam nisl nunc euismod.
 
@@ -141,16 +141,16 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl ege
 
 <Preview>
   <Story name="Default">
-    <Button>Hello</Button>
+    <Index>Hello</Index>
   </Story>
 </Preview>
 ```
 
 This example includes a few helpful Storybook scripts:
 
-- `pnpm dev`: Starts Storybook in dev mode with hot reloading at `localhost:6006`
-- `pnpm build`: Builds the Storybook UI and generates the static HTML files
-- `pnpm preview-storybook`: Starts a local server to view the generated Storybook UI
+- `yarn dev`: Starts Storybook in dev mode with hot reloading at `localhost:6006`
+- `yarn build`: Builds the Storybook UI and generates the static HTML files
+- `yarn preview-storybook`: Starts a local server to view the generated Storybook UI
 
 ## Versioning & Publishing Packages
 
@@ -160,7 +160,7 @@ You'll need to create an `NPM_TOKEN` and `GITHUB_TOKEN` and add it to your GitHu
 
 ### Generating the Changelog
 
-To generate your changelog, run `pnpm changeset` locally:
+To generate your changelog, run `yarn changeset` locally:
 
 1. **Which packages would you like to include?** – This shows which packages and changed and which have remained the same. By default, no packages are included. Press `space` to select the packages you want to include in the `changeset`.
 1. **Which packages should have a major bump?** – Press `space` to select the packages you want to bump versions for.
@@ -181,7 +181,7 @@ Turborepo runs the `build` script for all publishable packages (excluding docs) 
 
 - Rename folders in `packages/*` to replace `trunkrs-fe` with your desired scope
 - Search and replace `trunkrs-fe` with your desired scope
-- Re-run `pnpm install`
+- Re-run `yarn install`
 
 To publish packages to a private npm organization scope, **remove** the following from each of the `package.json`'s
 
