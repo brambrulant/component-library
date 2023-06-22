@@ -1,16 +1,53 @@
 import * as React from 'react'
 
-import { Typography } from '@trunkrs-fe/core/src'
 import ArrowLeft from '../../../packages/trunkrs-fe-core/src/Icons/ArrowLeft'
 import CaretDown from '../../../packages/trunkrs-fe-core/src/Icons/CaretDown'
 
 import { Button } from '@trunkrs-fe/core/src/Button'
 
 import type { Meta, StoryObj } from '@storybook/react'
-import { Story, Preview, Props } from '@storybook/addon-docs/blocks'
+import { Story } from '@storybook/addon-docs/blocks'
 
 const meta: Meta<typeof Button> = {
   component: Button,
+  argTypes: {
+    text: {
+      options: ['Button'],
+      control: { type: 'text' },
+    },
+    buttonType: {
+      options: ['primary', 'secondary', 'tertiary', 'text'],
+      control: { type: 'radio' },
+    },
+    intent: {
+      options: ['success', 'warning', 'danger'],
+      control: { type: 'radio' },
+    },
+    disabled: {
+      options: [true, false],
+      control: { type: 'boolean' },
+    },
+    fullWidth: {
+      options: [true, false],
+      control: { type: 'boolean' },
+    },
+    isLoading: {
+      options: [true, false],
+      control: { type: 'boolean' },
+    },
+    size: {
+      options: ['small', 'medium', 'large'],
+      control: { type: 'radio' },
+    },
+    startAdornment: {
+      options: [true, false],
+      control: { type: 'boolean' },
+    },
+    endAdornment: {
+      options: [true, false],
+      control: { type: 'boolean' },
+    },
+  },
 }
 
 export default meta
@@ -30,20 +67,43 @@ const StyledDiv = ({ children }: any) => (
   </div>
 )
 
+export const ButtonWithControls: Story = {
+  render: (args) => (
+    <StyledDiv>
+      <Button
+        {...args}
+        startAdornment={args.startAdornment && <ArrowLeft />}
+        endAdornment={args.endAdornment && <CaretDown />}
+      >
+        {args.text}
+      </Button>
+    </StyledDiv>
+  ),
+}
+ButtonWithControls.args = {
+  text: 'Button',
+  buttonType: 'primary',
+  intent: 'success',
+  size: 'medium',
+  disabled: false,
+  fullWidth: false,
+  isLoading: false,
+  startAdornment: true,
+  endAdornment: true,
+}
+
 export const Primary = () => {
   return (
     <StyledDiv>
-      <Button buttonType="primary">
-        <Typography variant="s">Default</Typography>
-      </Button>
+      <Button buttonType="primary">Default</Button>
       <Button buttonType="primary" intent="success">
-        <Typography variant="s">Success</Typography>
+        Success
       </Button>
       <Button buttonType="primary" intent="warning">
-        <Typography variant="s">Warning</Typography>
+        Warning
       </Button>
       <Button buttonType="primary" intent="danger">
-        <Typography variant="s">Danger</Typography>
+        Danger
       </Button>
     </StyledDiv>
   )
@@ -52,17 +112,15 @@ export const Primary = () => {
 export const Secondary = () => {
   return (
     <StyledDiv>
-      <Button buttonType="secondary">
-        <Typography variant="s">Default</Typography>
-      </Button>
+      <Button buttonType="secondary">Default</Button>
       <Button buttonType="secondary" intent="success">
-        <Typography variant="s">Success</Typography>
+        Success!
       </Button>
       <Button buttonType="secondary" intent="warning">
-        <Typography variant="s">Warning</Typography>
+        Warning
       </Button>
       <Button buttonType="secondary" intent="danger">
-        <Typography variant="s">Danger</Typography>
+        Danger
       </Button>
     </StyledDiv>
   )
@@ -71,17 +129,15 @@ export const Secondary = () => {
 export const Tertiary = () => {
   return (
     <StyledDiv>
-      <Button buttonType="tertiary">
-        <Typography variant="s">Default</Typography>
-      </Button>
+      <Button buttonType="tertiary">Default</Button>
       <Button buttonType="tertiary" intent="success">
-        <Typography variant="s">Success</Typography>
+        Success
       </Button>
       <Button buttonType="tertiary" intent="warning">
-        <Typography variant="s">Warning</Typography>
+        Warning
       </Button>
       <Button buttonType="tertiary" intent="danger">
-        <Typography variant="s">Danger</Typography>
+        Danger
       </Button>
     </StyledDiv>
   )
@@ -90,9 +146,7 @@ export const Tertiary = () => {
 export const Text = () => {
   return (
     <StyledDiv>
-      <Button buttonType="text">
-        <Typography variant="s">Default</Typography>
-      </Button>
+      <Button buttonType="text">Default</Button>
     </StyledDiv>
   )
 }
@@ -101,17 +155,17 @@ export const IconPlacement = () => {
   return (
     <StyledDiv>
       <Button buttonType="primary" startAdornment={<ArrowLeft />}>
-        <Typography variant="s">Start Adornment</Typography>
+        Start Adornment
       </Button>
       <Button buttonType="primary" endAdornment={<CaretDown />}>
-        <Typography variant="s">End Adornment</Typography>
+        End Adornment
       </Button>
       <Button
         buttonType="primary"
         startAdornment={<ArrowLeft />}
         endAdornment={<CaretDown />}
       >
-        <Typography variant="s">Both</Typography>
+        Both
       </Button>
     </StyledDiv>
   )
@@ -121,19 +175,7 @@ export const DisabledAndLoading = () => {
   return (
     <StyledDiv>
       <Button buttonType="primary" isLoading>
-        <Typography variant="s">Primary</Typography>
-      </Button>
-      <Button buttonType="secondary" isLoading>
-        <Typography variant="s">Secondary</Typography>
-      </Button>
-      <Button buttonType="tertiary" isLoading>
-        <Typography variant="s">Tertiary</Typography>
-      </Button>
-      <Button buttonType="primary" disabled>
-        <Typography variant="m">Disabled</Typography>
-      </Button>
-      <Button buttonType="primary" disabled startAdornment={<ArrowLeft />}>
-        <Typography variant="l">Disabled</Typography>
+        Primary
       </Button>
     </StyledDiv>
   )

@@ -15,3 +15,19 @@ export const getButtonHeight = (
       return theme.spacing.units(8)
   }
 }
+
+export const getFontColor = (
+  theme: TrunkrsTheme,
+  intent?: 'success' | 'danger' | 'warning',
+) => {
+  switch (intent) {
+    case 'success':
+      return theme.palette.primary.green.color60
+    case 'warning':
+      return theme.palette.intent.yellow.color60
+    case 'danger':
+      return theme.palette.intent.red.color60
+    default:
+      return 'inherit'
+  }
+}
