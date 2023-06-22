@@ -1,5 +1,11 @@
 # @trunkrs-fe/core
 
+## 1.1.0
+
+### Minor Changes
+
+- 5a8f98c: added input component and changed styling button, typography. Also added Icons
+
 ## 1.0.0
 
 ### Major Changes
