@@ -1,5 +1,11 @@
 # @trunkrs-fe/core
 
+## 1.3.1
+
+### Patch Changes
+
+- 805f606: add ThemeProvider
+
 ## 1.3.0
 
 ### Minor Changes
