@@ -1,5 +1,11 @@
 # @trunkrs-fe/core
 
+## 1.2.0
+
+### Minor Changes
+
+- f7c2575: adjusted styling of the button
+
 ## 1.1.0
 
 ### Minor Changes
