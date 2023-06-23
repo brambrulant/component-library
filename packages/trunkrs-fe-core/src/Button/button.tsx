@@ -25,7 +25,6 @@ const StartAdornment = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  // marginLeft: theme.spacing.units(2),
   '& svg': {
     height: '100%',
   },
